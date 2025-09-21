@@ -1,0 +1,39 @@
+from django.db import migrations, models
+import django.db.models.deletion
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('sbclc', '0002_auto'),
+    ]
+
+    operations = [
+        migrations.CreateModel(
+            name='Stop',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('standard_id', models.PositiveIntegerField()),
+                ('ars', models.PositiveIntegerField()),
+                ('name', models.CharField(max_length=30)),
+                ('x', models.FloatField()),
+                ('y', models.FloatField()),
+                ('labels', models.PositiveIntegerField()),
+                ('congestion', models.PositiveIntegerField()),
+                ('before', models.PositiveIntegerField(null=True)),
+                ('after', models.PositiveIntegerField(null=True)),
+                ('xVector', models.FloatField(null=True)),
+                ('yVector', models.FloatField(null=True)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Line',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('line_num', models.CharField(max_length=10)),
+                ('order', models.PositiveIntegerField()),
+                ('name', models.CharField(max_length=30)),
+                ('stop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sbclc.stop')),
+            ],
+        ),
+    ]
